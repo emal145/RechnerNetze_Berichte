@@ -1,0 +1,127 @@
+
+Router_2.3#show run
+Building configuration...
+
+
+Current configuration : 1237 bytes
+!
+! Last configuration change at 12:20:34 UTC Tue Jun 16 2015
+version 15.1
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname Router_2.3
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 4 06YFDUHH61wAE/kLkDq9BGho1QM5EnRtoyr8cHAUg.2
+!
+no aaa new-model
+!
+dot11 syslog
+ip source-route
+!
+!
+ --More--         !
+!
+!
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+voice-card 0
+!
+crypto pki token default removal timeout 0
+!
+!
+ --More--         !
+!
+license udi pid CISCO2801 sn FCZ120190ZQ
+!
+redundancy
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ ip address 10.100.0.2 255.255.255.240
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ no ip address
+ shutdown
+ --More--          duplex auto
+ speed auto
+!
+interface Serial0/2/0
+ ip address 10.2.30.6 255.255.255.252
+ no fair-queue
+!
+interface Serial0/2/1
+ no ip address
+ shutdown
+ clock rate 2000000
+!
+router rip
+ version 2
+ network 10.0.0.0
+ no auto-summary
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+!
+!
+!
+ --More--         !
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+mgcp profile default
+!
+!
+!
+!
+!
+!
+line con 0
+ password cisco
+ login
+line aux 0
+line vty 0 4
+ --More--          password cisco
+ login
+ transport input all
+!
+scheduler allocate 20000 1000
+end
+
+Router_2.3# 

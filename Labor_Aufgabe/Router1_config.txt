@@ -1,0 +1,145 @@
+show run
+Building configuration...
+
+
+Current configuration : 1680 bytes
+!
+! Last configuration change at 12:35:44 UTC Tue Jun 16 2015
+version 15.1
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname Router_2.1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 4 06YFDUHH61wAE/kLkDq9BGho1QM5EnRtoyr8cHAUg.2
+!
+no aaa new-model
+!
+memory-size iomem 25
+dot11 syslog
+ip source-route
+!
+ --More--         !
+!
+ip dhcp excluded-address 10.2.10.1 10.2.10.10
+ip dhcp excluded-address 10.2.20.1 10.2.20.10
+!
+ip dhcp pool vlan10pool
+ network 10.2.10.0 255.255.255.0
+ default-router 10.2.10.1 
+!
+ip dhcp pool vlan20pool
+ network 10.2.20.0 255.255.255.0
+ default-router 10.2.20.1 
+!
+!
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+ --More--         !
+!
+!
+!
+!
+!
+voice-card 0
+!
+crypto pki token default removal timeout 0
+!
+!
+!
+!
+license udi pid CISCO2801 sn FHK084713UZ
+!
+redundancy
+!
+!
+! 
+!
+!
+!
+!
+ --More--         !
+!
+!
+interface FastEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/0.10
+ encapsulation dot1Q 10
+ ip address 10.2.10.1 255.255.255.0
+!
+interface FastEthernet0/0.20
+ encapsulation dot1Q 20
+ ip address 10.2.20.1 255.255.255.0
+!
+interface FastEthernet0/1
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+interface Serial0/2/0
+ --More--          ip address 10.2.30.2 255.255.255.252
+ no fair-queue
+!
+interface Serial0/2/1
+ no ip address
+ shutdown
+ clock rate 2000000
+!
+router rip
+ version 2
+ network 10.0.0.0
+ no auto-summary
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+!
+!
+!
+!
+!
+!
+!
+ --More--         !
+!
+control-plane
+!
+!
+!
+!
+mgcp profile default
+!
+!
+!
+!
+!
+!
+line con 0
+ password cisco
+ login
+line aux 0
+line vty 0 4
+ password cisco
+ login
+ transport input all
+!
+ --More--         scheduler allocate 20000 1000
+end
+
+Router_2.1#
